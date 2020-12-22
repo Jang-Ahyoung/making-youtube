@@ -6,6 +6,22 @@ import Video_list from './components/videoList/video_list';
 function App() {
   const [videos, setVideos] = useState([]); // 1. 초기값은 텅비어진 videos의 목록
 
+  const search = query =>{
+    const requestOptions = {
+      method: 'GET',
+      redirect: 'follow'
+    };
+    // 쿼리로 바꿔줘서 요청한 다음 json으로 바꿔줘
+    fetch(`https://content-youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${query}&type=video&key=AIzaSyDdDBqTrgjO5stM0DhLvxa9WODoosWfPUE`, requestOptions)
+      .then(response => response.json())
+      // 2가지 키를 가진 item을 복사해와 오브젝트 대신에 id primitive 타입으로 바꿔줄 것
+      // 기존에 있는 아이템 정보를 유지하고 아이디만 오브젝트가 아닌 오브젝트안의 videoId로 덮어줄것
+      .then(result => result.items.map(item=>({...item, id:item.id.videoId})))
+      .then(items => setVideos(items))
+      .catch(error => console.log('error', error));
+
+  };
+
   //2. 마운트되거나 업데이트 되어졌을때 쓸 수 있는 콜백 등록 -> useEffect에 원하는 함수 등록해놓으면 컴포넌트 마운트 되거나 업데이트 될때마다 호출돼
   useEffect(()=>{
     // 4. 함수 안에 postman에서 가져온 fetch 코드 복붙해와
@@ -32,7 +48,8 @@ function App() {
   return (
 
     <div className={styles.app}>
-      <SearchHeader/>
+      {/* onSearch가 발생하면 내 search 호출하면돼 */}
+      <SearchHeader onSearch={search}/>
       <Video_list videos={videos}/>
     </div>
 
