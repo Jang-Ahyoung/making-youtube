@@ -1,5 +1,6 @@
 import { useEffect,useState } from 'react';
-import './app.css';
+import styles from './app.module.css';
+import SearchHeader from './components/search_header/search_header';
 import Video_list from './components/videoList/video_list';
 
 function App() {
@@ -29,7 +30,16 @@ function App() {
   // 아무것도 전달하지 않으면 컴포넌트에 state나 prop이 업데이트 될때마다 무조건 반복 호출돼
 
   return (
-    <Video_list videos={videos}/>
+
+    <div className={styles.app}>
+      <SearchHeader/>
+      <Video_list videos={videos}/>
+    </div>
+
+
+
+
+    
   );
 }
 

@@ -1,0 +1,29 @@
+.header {
+  display: flex;
+  height: 5rem;
+  padding: 0.8em 1em;
+  background-color: black;
+  color: white;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  margin-right: 0.8em;
+}
+
+.input {
+  flex-basis: 100%;
+  /* // 너비가 가능한 만큼 플렉스 박스를 가득채웠으면 좋겠다 */
+  font-size: 1.2rem;
+  outline: none;
+}
+.button {
+  background-color: darkgray;
+  /* outline: 0; */
+}
+
+.icon {
+  height: 100%;
+  padding: 0.5em 0.2em;
+}
